@@ -33,6 +33,15 @@ module.exports = function(config) {
     exclude: [
     ],
 
+    ngHtml2JsPreprocessor: {
+      moduleName: 'chequeApp',
+      stripPrefix: 'app/',
+    },
+
+    preprocessors: {
+      '**/*.html': ['ng-html2js']
+    },
+
     // web server port
     port: 8080,
 
@@ -50,6 +59,7 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
+      'karma-ng-html2js-preprocessor',
       'karma-phantomjs-launcher',
       'karma-jasmine'
     ],

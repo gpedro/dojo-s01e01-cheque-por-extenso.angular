@@ -7,10 +7,7 @@ describe('Directive: cheque', function () {
 
   var element, scope, template;
 
-  beforeEach(inject(function ($templateCache, $rootScope) {
-    template = $templateCache.get('../app/scripts/directives/cheque.html');
-    $templateCache.put('scripts/directives/cheque.html',template);
-
+  beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
   }));
 
@@ -18,7 +15,8 @@ describe('Directive: cheque', function () {
     scope.valor = 1;
     element = angular.element('<cheque valor="1"></cheque>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('um real');
+    scope.$digest();
+    expect(element.text()).toMatch('um real');
   }));
 
   it('dois reais', inject(function ($compile) {
@@ -26,8 +24,7 @@ describe('Directive: cheque', function () {
     element = angular.element('<cheque valor="2"></cheque>');
     element = $compile(element)(scope);
     scope.$digest();
-    console.log(element.text());
-    expect(element.text()).toBe('dois reais');
+    expect(element.text()).toMatch('dois reais');
   }));
 
   it('cinquenta centavos', inject(function ($compile) {
@@ -35,7 +32,7 @@ describe('Directive: cheque', function () {
     element = angular.element('<cheque valor="0.5"></cheque>');
     element = $compile(element)(scope);
     scope.$digest();
-    expect(element.text()).toBe('cinquenta centavos');
+    expect(element.text()).toMatch('cinquenta centavos');
   }));
 
   it('cento e vinte e dois reais', inject(function ($compile) {
@@ -43,7 +40,7 @@ describe('Directive: cheque', function () {
     element = angular.element('<cheque valor="122"></cheque>');
     element = $compile(element)(scope);
     scope.$digest();
-    expect(element.text()).toBe('cento e vinte e dois reais');
+    expect(element.text()).toMatch('cento e vinte e dois reais');
   }));
 
   it('cento e quinze reais', inject(function ($compile) {
@@ -51,7 +48,7 @@ describe('Directive: cheque', function () {
     element = angular.element('<cheque valor="115"></cheque>');
     element = $compile(element)(scope);
     scope.$digest();
-    expect(element.text()).toBe('cento e quinze reais');
+    expect(element.text()).toMatch('cento e quinze reais');
   }));
 
   it('cento e um reais', inject(function ($compile) {
@@ -59,7 +56,7 @@ describe('Directive: cheque', function () {
     element = angular.element('<cheque valor="101"></cheque>');
     element = $compile(element)(scope);
     scope.$digest();
-    expect(element.text()).toBe('cento e um reais');
+    expect(element.text()).toMatch('cento e um reais');
   }));
 
   it('mil reais', inject(function ($compile) {
@@ -67,6 +64,6 @@ describe('Directive: cheque', function () {
     element = angular.element('<cheque valor="1000"></cheque>');
     element = $compile(element)(scope);
     scope.$digest();
-    expect(element.text()).toBe('mil reais');
+    expect(element.text()).toMatch('mil reais');
   }));
 });
